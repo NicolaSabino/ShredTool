@@ -1,3 +1,3 @@
-module ShredTool
+module ShredFile
 
 go 1.18
