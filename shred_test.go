@@ -12,8 +12,6 @@ const (
 	dummyTextFile = "tmp/dummy.txt"
 	dummyBinFile  = "tmp/dummy.bin"
 	rootFile      = "sample/root_file_sample.bin"
-	writeOnlyFile = "samples/write_only_file_sample.txt"
-	readOnlyFile  = "samples/read_only_file_sample.txt"
 )
 
 func createDummyTextFile() {
@@ -78,5 +76,12 @@ func TestMissingFile(t *testing.T) {
 	Shred("noFile.txt")
 }
 
-func TestNoAccessToMetadata(t *testing.T) {
+func TesNoAccess(t *testing.T) {
+	defer func() {
+		r := recover()
+		if r == nil {
+			t.Errorf("No expected panic `permission denied`")
+		}
+	}()
+	Shred(rootFile)
 }

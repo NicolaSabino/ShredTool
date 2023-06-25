@@ -31,3 +31,13 @@ make build
 ```
 
 a `bin/shred` executable file will be generated. You clean via `make clean`.
+
+## Run tests
+
+Each time test is executed the coverage is printed.
+It is also possible to generate an html coverage report as shown below.
+
+```bash
+make test
+make cov_report
+```
