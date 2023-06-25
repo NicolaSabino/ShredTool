@@ -25,13 +25,13 @@ func Shred(p string) {
 	f, err := os.OpenFile(p, os.O_RDWR, 0666)
 
 	if err != nil {
-		log.Fatalln("Unable to open file", err)
+		log.Panicln("Unable to open file", err)
 	}
 
 	info, err := f.Stat()
 	if err != nil {
 		f.Close()
-		log.Fatalln("Unable to read file stat", err)
+		log.Panicln("Unable to read file stat", err)
 	}
 	fSize := info.Size()
 	log.Println("File size", fSize)
@@ -54,7 +54,7 @@ func Shred(p string) {
 	log.Println("Close file")
 	err = f.Close()
 	if err != nil {
-		log.Fatalln("Unable to write file", err)
+		log.Panicln("Unable to close file", err)
 	}
 
 	log.Println("Delete file")

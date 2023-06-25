@@ -8,6 +8,10 @@
 * <https://www.practical-go-lessons.com/post/how-to-generate-random-bytes-with-golang-ccc9755gflds70ubqc2g>
 * <https://blog.boot.dev/golang/golang-logging-best-practices/>
 * <https://pkg.go.dev/os#File.Write>
+* <https://www.digitalocean.com/community/tutorials/how-to-write-unit-tests-in-go-using-go-test-and-the-testing-package>
+* <https://zetcode.com/golang/writefile/>
+* <https://stackoverflow.com/questions/10516662/how-to-measure-test-coverage-in-go>
+* <https://stackoverflow.com/questions/14249467/os-mkdir-and-os-mkdirall-permissions>
 
 ## Run go script
 

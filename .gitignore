@@ -2,3 +2,4 @@ bin/
 samples/
 tmp/
 *.log
+*.out
