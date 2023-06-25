@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+// getRandData return a slice of random bytes
+// according to given input size
 func getRandData(size int) []byte {
 	buf := make([]byte, size)
 	source := rand.NewSource(time.Now().UnixNano())
@@ -19,15 +21,22 @@ func getRandData(size int) []byte {
 	return buf
 }
 
+// Shred apply the shred logic to given
+// input file path `p`
+//
+// If by any chance an error occurs during
+// the shred execution a `panic` is issued
+// and has to be handled by the caller
 func Shred(p string) {
 
+	// Open the target file stored at `p`
 	log.Println("Open file at", p)
 	f, err := os.OpenFile(p, os.O_RDWR, 0666)
-
 	if err != nil {
 		log.Panicln("Unable to open file", err)
 	}
 
+	// Obtain file dimension via stat command
 	info, err := f.Stat()
 	if err != nil {
 		f.Close()
@@ -36,6 +45,8 @@ func Shred(p string) {
 	fSize := info.Size()
 	log.Println("File size", fSize)
 
+	// Overwrite three times the file content
+	// with random data
 	log.Println("Write file with random data")
 	for i := 0; i < 3; i++ {
 		random := getRandData(int(fSize))
@@ -51,15 +62,16 @@ func Shred(p string) {
 		}
 	}
 
+	// Close the target file
 	log.Println("Close file")
 	err = f.Close()
 	if err != nil {
 		log.Panicln("Unable to close file", err)
 	}
 
+	// Delete the target file
 	log.Println("Delete file")
 	err = os.Remove(p)
-
 	if err != nil {
 		log.Fatalln("Unable to delete file", err)
 	}

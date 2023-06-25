@@ -1,3 +1,11 @@
+/*
+ * Shred command that overwrites the given file 3 times with
+ * random data and delete the file afterwards.
+ *
+ * Usage:
+ *     shred <file_path>
+ *
+ */
 package main
 
 import (
@@ -5,6 +13,7 @@ import (
 	"os"
 )
 
+// The program entry function
 func main() {
 
 	if len(os.Args) != 2 {

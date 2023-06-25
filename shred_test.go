@@ -14,22 +14,24 @@ const (
 	rootFile      = "sample/root_file_sample.bin"
 )
 
+// crateDummyTextFile create a text file
+// in `./tmp` folder
 func createDummyTextFile() {
 	f, err := os.Create(dummyTextFile)
 
 	if err != nil {
 		log.Fatalln("Unable to create dummy file", err)
 	}
-
 	defer f.Close()
 
 	_, err = f.WriteString("Dummy content\n")
-
 	if err != nil {
 		log.Fatalln("Unable to write content in dummy file", err)
 	}
 }
 
+// createDummyBinFile create binary file
+// in `./tmp` folder based on given file mode
 func createDummyBinFile(m fs.FileMode) {
 	dummyContent := []byte{0x12, 0x34, 0x56, 0x78}
 	err := ioutil.WriteFile(dummyBinFile, dummyContent, m)
@@ -38,6 +40,10 @@ func createDummyBinFile(m fs.FileMode) {
 	}
 }
 
+// TestShredText shred textual file
+//
+// The file exists and everything should be
+// performed without issues
 func TestShredText(t *testing.T) {
 	createDummyTextFile()
 	Shred(dummyTextFile)
@@ -52,6 +58,10 @@ func TestShredText(t *testing.T) {
 	}
 }
 
+// TestShredBin shred binary file
+//
+// The file exists and everything should be
+// performed without issues
 func TestShredBin(t *testing.T) {
 	createDummyBinFile(0666)
 	Shred(dummyBinFile)
@@ -66,6 +76,10 @@ func TestShredBin(t *testing.T) {
 	}
 }
 
+// TestMissingFile shred missing file
+//
+// We expect a `panic` to be raised by `Shred`
+// function while calling a non existing file
 func TestMissingFile(t *testing.T) {
 	defer func() {
 		if r := recover(); r == nil {
@@ -76,6 +90,10 @@ func TestMissingFile(t *testing.T) {
 	Shred("noFile.txt")
 }
 
+// TestNoAccess shred file without permissions
+//
+// Try to shred file owned by root user
+// We expect a `panic` to be raised
 func TesNoAccess(t *testing.T) {
 	defer func() {
 		r := recover()
